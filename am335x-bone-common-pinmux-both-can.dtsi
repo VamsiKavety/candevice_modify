@@ -1,0 +1,120 @@
+/*
+ * Copyright (C) 2012 Texas Instruments Incorporated - http://www.ti.com/
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+
+#include <dt-bindings/board/am335x-bbw-bbb-base.h>
+#include "am335x-peripheral-can1.dtsi"
+#include "am335x-peripheral-can0.dtsi"
+
+/* cape universal */
+
+/*
+ *&ocp {
+ *	P9_19_pinmux {
+ *		mode = "can";
+ *	};
+ *	P9_20_pinmux {
+ *		mode = "can";
+ *	};
+ *};
+ *
+ *&dcan0 {
+ *	pinctrl-0 = <>;
+ *};
+ *
+ */
+
+
+/*
+ *&ocp {
+ *	P9_24_pinmux {
+ *		mode = "can";
+ *	};
+ *	P9_26_pinmux {
+ *		mode = "can";
+ *	};
+ *};
+ *
+ *&dcan1 {
+ *	pinctrl-0 = <>;
+ *};
+ *
+ */
+
+/* standard */
+
+&am33xx_pinmux {
+
+	dcan0_pins: pinmux_dcan0_pins {
+		pinctrl-single,pins = <
+			/* P9_20: uart1_ctsn.d_can0_tx */
+			BONE_P9_20 (PIN_OUTPUT_PULLUP | MUX_MODE2)
+			/* P9_19: uart1_rtsn.d_can0_rx */
+			BONE_P9_19 (PIN_INPUT_PULLUP | MUX_MODE2)
+		>;
+	};
+
+	dcan1_pins: pinmux_dcan1_pins {
+		pinctrl-single,pins = <
+			/* P9_26: uart1_rxd.d_can1_tx */
+			BONE_P9_26 (PIN_OUTPUT_PULLUP | MUX_MODE2)
+			/* P9_24: uart1_txd.d_can1_rx */
+			BONE_P9_24 (PIN_INPUT_PULLUP | MUX_MODE2)
+		>;
+	};
+};
+
+&dcan0 {
+	pinctrl-0 = <&dcan0_pins>;
+};
+
+&dcan1 {
+	pinctrl-0 = <&dcan1_pins>;
+};
+/* For Dcan0 */
+P9_19_can_pin: pinmux_P9_19_can_pin {
+	pinctrl-single,pins = <0x17c  0x32>; };
+P9_20_can_pin: pinmux_P9_20_can_pin {
+	pinctrl-single,pins = <0x178  0x12>; };
+
+P9_19_pinmux {
+	compatible = “bone-pinmux-helper”;
+	status = “okay”;
+	pincrtl-names = “can”;
+	pinctrl-0 = <&P9_19_can_pin>
+};
+
+P9_20_pinmux {
+	compatible = “bone-pinmux-helper”;
+	status = “okay”;
+	pincrtl-names = “can”;
+	pinctrl-0 = <&P9_20_can_pin>
+};
+/* For  Dcan1 */
+P9_24_can_pin: pinmux_P9_24_can_pin {
+	pinctrl-single,pins = <0x184  0x32>; };
+P9_26_can_pin: pinmux_P9_26_can_pin {
+	pinctrl-single,pins = <0x180  0x12>; };
+
+P9_24_pinmux {
+	compatible = “bone-pinmux-helper”;
+	status = “okay”;
+	pincrtl-names = “can”;
+	pinctrl-0 = <&P9_24_can_pin>
+};
+
+P9_26_pinmux {
+	compatible = “bone-pinmux-helper”;
+	status = “okay”;
+	pincrtl-names = “can”;
+	pinctrl-0 = <&P9_26_can_pin>
+};
+
+
+
+
+
